@@ -2,3 +2,5 @@
 config.php
 # PHPStorm
 .idea/
+#Workbench    
+data/mydb_ana.mwb.bak
