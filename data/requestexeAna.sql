@@ -90,11 +90,25 @@ SELECT p.id , p.title , p.datecreate, c.id as idcategory,c.title as titlecategor
            ORDER BY p.datecreate ASC ; 
 
 # Séléction des champs id, title et datecreate de la table post, AVEC l'id (renommé en idcategory) et title (renommé en titlecategory) de la table category DANS TOUS LES CAS même si le lien N'EXISTE PAS (toutes les category) ordonnés par datecreate ascendante
-
+SELECT p.id , p.title , p.datecreate ,c.id AS idcategory,c.title AS titlecategory 
+   FROM post AS p 
+    RIGHT JOIN category_has_post h
+      ON p.id =h.post_id 
+        RIGHT JOIN category c 
+          ON c.id=h.category_id
+           ORDER BY p.datecreate ASC; 
+    
 
 # idem que le précédent pour trouver QUE les category qui n'ont PAS de post (sans les champs de category à l'affichage, voir isnull()), en partant de FROM post !
 
-
+SELECT p.id , p.title , p.datecreate ,c.id AS idcategory,c.title AS titlecategory 
+   FROM post AS p 
+    RIGHT JOIN category_has_post h
+      ON p.id =h.post_id 
+        RIGHT JOIN category c 
+          ON c.id=h.category_id
+            WHERE p.id is null 
+           ORDER BY p.datecreate ASC; 
 #
 # JOINTURES M2M + one to many (1 ou plusieures o2m)
 # !!! 2 jointures many to many pourront mener à des comportements inattendus! A éviter
